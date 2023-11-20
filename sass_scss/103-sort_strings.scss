@@ -1,0 +1,31 @@
+// Define the list to sort
+$list_to_sort: (
+  'orange',
+  'apple',
+  'banana',
+  'grape',
+  'mango'
+);
+
+// Define a recursive function to perform bubble sort
+@function bubbleSort($list) {
+  @if length($list) <= 1 {
+    @return $list;
+  }
+
+  @for $i from 1 to length($list) {
+    @if $list[$i] < $list[$i - 1] {
+      @set $temp: $list[$i];
+      @set $list[$i]: $list[$i - 1];
+      @set $list[$i - 1]: $temp;
+    }
+  }
+
+  @return bubbleSort($list - 1);
+}
+
+// Sort the list using bubble sort
+$sortedList: bubbleSort($list_to_sort);
+
+// Print the sorted list in the debug output
+@debug $sortedList;
